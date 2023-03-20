@@ -599,26 +599,46 @@ SELECT
 SELECT  INSTR('HELLO, ORACLE!', 'L') AS INSTR_1,
         INSTR('HELLO, ORACLE!', 'L', 5) AS INSTR_2,
         INSTR('HELLO, ORACLE!', 'L', 2, 2) AS INSTR_3
-FROM daul;
+FROM
+daul;
 
 --4) replace : 특정 문자를 다른 문자로 변경
 -- relplace(문자열데이터, 찾는문자, 변경문자)
 
 -- 010-1234-5678 - 를 빈 문자열로 변경 / -를 없애기
-select '010-1234-5678' as 변경전, replace('010-1234-5678','-',' ') as replace_1, replace('010-1234-5678','-') as replace_2
-from dual;
+SELECT
+    '010-1234-5678'                    AS 변경전,
+    replace('010-1234-5678', '-', ' ') AS replace_1,
+    replace('010-1234-5678', '-')      AS replace_2
+FROM
+    dual;
 
 -- '이것이 Oracle 이다', '이것이' => this is 변경
-select '이것이 Oracle 이다' as 변경전, replace('이것이 Oracle 이다','이것이','This is') as replace_1
-from dual;
+SELECT
+    '이것이 Oracle 이다'                            AS 변경전,
+    replace('이것이 Oracle 이다', '이것이', 'This is') AS replace_1
+FROM
+    dual;
 
 -- 5) concat : 두 문자열 데이터 합치기
-select
-concat(empno, ename)
-from
-emp;
+SELECT
+    concat(empno, ename)
+FROM
+    emp;
+    
 -- concat(empno,':',ename) : 오류남, 딱 2개만 수용하기 때문
-select
-concat(empno,concat(':',ename))
-from
-emp;
+SELECT
+    concat(empno,
+           concat(':', ename))
+FROM
+    emp;
+
+-- || : 문자열 연결 연산자
+SELECT
+    empno || ename,
+    empno || ':'  || ename
+FROM
+    emp;
+
+-- 6) TRIM, LTRIM, RTRIM : 공백 포함 특정 문자 제거
+SELECT '    이것이    ', TRIM(' 이것이 ')FROM DUAL;
